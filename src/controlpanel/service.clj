@@ -14,15 +14,12 @@
 (defn get-command [state]
     (get service-commands state))
 
-(defn service-state-change [name state]
-    (sh (clojure.string/join " " (rest (first (re-seq #"(\S+)\s?" (format (get-command state) name)))))))
+(defn service-state-change! [name state]
+    (panel/run-command! (format (get-command state) name)))
 
 (defn service-select! []
     (panel/menu!
         (for [n services]
             [n #(panel/menu!
                     (for [st '("stop" "start")]
-                        [(format "%s %s" st n) (fn [] (service-state-change n st))]))])))
-
-(defn service-menu! []
-    (service-select!))
+                        [(format "%s %s" st n) (fn [] (service-state-change! n st))]))])))

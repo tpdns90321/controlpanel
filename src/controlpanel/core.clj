@@ -8,5 +8,5 @@
     (menu-maker
       ["hello" #(println "Hello")]
       ["test" #(println "test")]
-      ["Service" #(service-menu!)]
-      ["exit" #(menu-exit)])))
+      ["Service" #(service-select!)]
+      ["exit" #(exit!)])))

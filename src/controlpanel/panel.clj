@@ -1,4 +1,6 @@
-(ns controlpanel.panel)
+(ns controlpanel.panel
+  (:use [clojure.java.shell :only [sh]]
+        [clojure.string :only [join]]))
 
 (defn menu-maker [& lst]
   (for [l lst]
@@ -25,5 +27,11 @@
 
 (defn menu-infinite! [lst]
   (while (not (false? (menu! lst)))))
+
+(defn run-command! [com]
+  (sh (join " " (rest (first (re-seq #"(\S+)\s?" com))))))
+
+(defn exit! []
+  (System/exit 0))
 
 (defn menu-exit [] false)
