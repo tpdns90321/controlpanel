@@ -6,7 +6,5 @@
 (defn -main [& args]
   (menu-infinite!
     (menu-maker
-      ["hello" #(println "Hello")]
-      ["test" #(println "test")]
       ["Service" #(service-select!)]
       ["exit" #(exit!)])))
