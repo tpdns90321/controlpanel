@@ -30,7 +30,7 @@
 
 (defn run-command! [com]
   (try (apply sh (for [res (re-seq #"(\S+)\s?" com)]
-                    (first res)))
+                    (second res)))
       (catch java.io.IOException e (println "Can't Run Command"))))
 
 (defn menu-exit [] false)
