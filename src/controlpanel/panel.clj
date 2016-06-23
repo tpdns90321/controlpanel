@@ -29,7 +29,8 @@
   (while (not (false? (menu! lst)))))
 
 (defn run-command! [com]
-  (sh (join " " (rest (first (re-seq #"(\S+)\s?" com))))))
+  (try (sh (join " " (rest (first (re-seq #"(\S+)\s?" com)))))
+      (catch Exception e (println "Can't Run Command"))))
 
 (defn exit! []
   (System/exit 0))
