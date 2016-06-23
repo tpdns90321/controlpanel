@@ -11,10 +11,10 @@
 
 (def service-commands (parse-stream service-command-file))
 
-(defn get-command [state]
+(defn get-command [^String state]
     (get service-commands state))
 
-(defn service-state-change! [name state]
+(defn service-state-change! [^String name ^String state]
     (panel/run-command! (format (get-command state) name)))
 
 (defn service-select! []

@@ -6,31 +6,29 @@
   (for [l lst]
     l))
 
-(defn selectnum! [f]
+(defn selectnum! [^clojure.lang.AFunction f]
   (try (f (Integer. (read-line)))
     (catch java.lang.NumberFormatException _
       (let []
-        (println "Not Number")
+        (println "Wrong Number")
         true))))
 
-(defn run-function [n lst limit]
+(defn run-function [^Long n ^clojure.lang.IPersistentCollection lst ^Long limit]
   (if (not (or (= n 0) (> n limit)))
     ((second (nth lst (- n 1))))
-    false))
+    true))
 
-(defn menu! [lst]
+(defn menu! [^clojure.lang.IPersistentCollection lst]
   (let [i (atom 0)]
     (doseq [l lst]
       (println (swap! i + 1) (first l)))
     (println "Select Number (1~) (other number exit)")
     (selectnum! #(run-function % lst @i))))
 
-(defn menu-infinite! [lst]
+(defn menu-infinite! [^clojure.lang.IPersistentCollection lst]
   (while (not (false? (menu! lst)))))
 
-(defn run-command! [com]
+(defn run-command! [^String com]
   (try (apply sh (for [res (re-seq #"(\S+)\s?" com)]
                     (second res)))
       (catch java.io.IOException e (println "Can't Run Command"))))
-
-(defn menu-exit [] false)
