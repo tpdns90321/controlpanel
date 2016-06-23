@@ -7,7 +7,7 @@
 (def service-command-file
     (-> "service-command.conf" io/resource io/reader))
 
-(def services ["nginx"])
+(def services ["openvpn@server"])
 
 (def service-commands (parse-stream service-command-file))
 
