@@ -7,4 +7,4 @@
   (menu-infinite!
     (menu-maker
       ["Service" #(service-select!)]
-      ["exit" #(exit!)])))
+      ["exit" #(menu-exit)])))

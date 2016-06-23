@@ -8,14 +8,14 @@
 
 (defn selectnum! [f]
   (try (f (Integer. (read-line)))
-    (catch Exception e
+    (catch java.lang.NumberFormatException _
       (let []
-        (println e)
-        false))))
+        (println "Not Number")
+        true))))
 
 (defn run-function [n lst limit]
   (if (not (or (= n 0) (> n limit)))
-    (do ((second (nth lst (- n 1)))))
+    ((second (nth lst (- n 1))))
     false))
 
 (defn menu! [lst]
@@ -29,10 +29,8 @@
   (while (not (false? (menu! lst)))))
 
 (defn run-command! [com]
-  (try (println (sh (join " " (rest (first (re-seq #"(\S+)\s?" com))))))
-      (catch Exception e (println "Can't Run Command"))))
-
-(defn exit! []
-  (System/exit 0))
+  (try (apply sh (for [res (re-seq #"(\S+)\s?" com)]
+                    (first res)))
+      (catch java.io.IOException e (println "Can't Run Command"))))
 
 (defn menu-exit [] false)
