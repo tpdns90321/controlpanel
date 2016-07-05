@@ -1,8 +1,7 @@
 (ns controlpanel.service
     (:require [clojure.java.io :as io]
               [controlpanel.panel :as panel]
-              [cheshire.core :refer :all])
-    (:use [clojure.java.shell :only [sh]]))
+              [cheshire.core :refer :all]))
 
 (def service-command-file
     (-> "service-command.conf" io/resource io/reader))

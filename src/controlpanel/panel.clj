@@ -13,7 +13,7 @@
         (println "Wrong Number")
         true))))
 
-(defn run-function [^Long n ^clojure.lang.IPersistentCollection lst ^Long limit]
+(defn run-second-function [^Long n ^clojure.lang.IPersistentCollection lst ^Long limit]
   (if (not (or (= n 0) (> n limit)))
     ((second (nth lst (- n 1))))
     true))
@@ -23,7 +23,7 @@
     (doseq [l lst]
       (println (swap! i + 1) (first l)))
     (println "Select Number (1~) (other number exit)")
-    (selectnum! #(run-function % lst @i))))
+    (selectnum! #(run-second-function % lst @i))))
 
 (defn menu-infinite! [^clojure.lang.IPersistentCollection lst]
   (while (not (false? (menu! lst)))))
